@@ -3,7 +3,13 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Git Release Cheatsheet</title>
+
+        <title>Best Practice</title>
+
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://w3.org viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😊</text></svg>"
+        />
         <style>
             :root {
                 --bg: #0d1117;
@@ -25,6 +31,15 @@
                 box-sizing: border-box;
             }
 
+            a {
+                text-decoration: none;
+                color: var(--cyan);
+            }
+
+            a:visited {
+                color: var(--cyan);
+            }
+
             body {
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
                 background: var(--bg);
@@ -43,7 +58,6 @@
             .subtitle {
                 text-align: center;
                 color: var(--text-dim);
-                margin-bottom: 32px;
                 font-size: 14px;
             }
 
@@ -90,7 +104,16 @@
                 color: var(--text-dim);
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
-                margin: 14px 0 6px;
+            }
+
+            .padding-x {
+                padding-top: .5rem;
+                padding-bottom: .5rem;
+            }
+
+            .padding-y {
+                padding-left: .5rem;
+                padding-right: .5rem,;
             }
 
             pre {
@@ -245,48 +268,70 @@
                 font-size: 12px;
                 margin-bottom: 20px;
             }
+
+            .flex {
+                display: flex;
+                align-self: center;
+            }
         </style>
     </head>
     <body>
         <h1>🚀 Git Release Cheatsheet</h1>
-        <p class="subtitle">Стратегия: feature-ветки → develop (тест) → release (выборочный cherry-pick)</p>
+        <p class="subtitle">Полезные фичи</p>
         <p class="copy-hint">нажми на блок кода чтобы скопировать</p>
 
         <div class="grid">
             <!-- STEP 1 -->
             <div class="card">
-                <h2><span class="num">1</span> Новая задача <span class="tag tag-safe">безопасно</span></h2>
-                <h3>создать ветку от develop</h3>
-                <pre onclick="copyCode(this)"><span class="cmd">git checkout</span> <span class="branch">develop</span>
-<span class="cmd">git pull</span>
-<span class="cmd">git checkout</span> <span class="flag">-b</span> <span class="branch">feature/TASK-123-описание</span></pre>
-                <h3>работать, коммитить свободно</h3>
+                <h2><span class="num">1</span> Деплой Instore <span class="tag tag-caution">важно!</span></h2>
+                <h3 class="padding-x">Develop</h3>
                 <pre
                     onclick="copyCode(this)"
-                ><span class="cmd">git add</span> . && <span class="cmd">git commit</span> <span class="flag">-m</span> "wip"
-<span class="cmd">git add</span> . && <span class="cmd">git commit</span> <span class="flag">-m</span> "fix"
-<span class="cmd">git add</span> . && <span class="cmd">git commit</span> <span class="flag">-m</span> "done"</pre>
-                <div class="note">Коммитов может быть сколько угодно — на этом этапе порядок не важен.</div>
+                ><span class="cmd">ssh</span> <span class="branch">dockeradmin@192.168.204.144</span></pre>
+                <div class="note">
+                    Порты </br>
+                    <strong>:81</strong> — <a href="https://develop.tr-portal.ru">develop.tr-portal.ru</a> </br>
+                    <strong>:80</strong> — <a href="https://release.tr-portal.ru ">release.tr-portal.ru </a>
+                </div>
+
+                <div class="note">
+                    Порты TRS 2.0</br>
+                    <strong>:82</strong> — <a href="http://trs.tr-portal.ru/">trs.tr-portal.ru/</a></br>
+                </div>
+
+                <h3 class="padding-x">Production</h3>
+
+                <pre onclick="copyCode(this)"><span class="cmd">ssh</span> <span class="branch">dockeradmin@192.168.150.103</span></pre>
+                <div class="note">
+                    Порт </br>
+                    <strong>:81</strong> — tr-portal.ru </br>
+                </div>
             </div>
 
             <!-- STEP 2 -->
             <div class="card">
-                <h2><span class="num">2</span> Squash перед мержем <span class="tag tag-caution">важно</span></h2>
-                <h3>склеить все коммиты задачи в один</h3>
-                <pre onclick="copyCode(this)"><span class="comment"># Интерактивный rebase на develop</span>
-<span class="cmd">git rebase</span> <span class="flag">-i</span> <span class="branch">develop</span>
+                <h2><span class="num">2</span> Команды деплоя <span class="tag tag-caution">важно!</span></h2>
+                <div class="flex padding-x">
+                    <h3>TR</h3> <div class="tag">(build and push local)</div>
+                </div>
+   
+                <pre onclick="copyCode(this)"><span class="cmd">make</span> <span class="flag">build</span> <span class="branch">VERSION=3.45.11-5</span></pre>
+                <pre onclick="copyCode(this)"><span class="cmd">make</span> <span class="flag">push</span> <span class="branch">VERSION=3.45.11-5</span></pre>
 
-<span class="comment"># В редакторе: первый оставить pick,</span>
-<span class="comment"># остальные заменить на squash (или s)</span>
-<span class="comment"># Написать итоговое сообщение:</span>
-<span class="comment"># "TASK-123: Описание что сделано"</span></pre>
-                <h3>или проще — soft reset</h3>
-                <pre onclick="copyCode(this)"><span class="comment"># Узнать сколько коммитов</span>
-<span class="cmd">git log</span> <span class="flag">--oneline</span> <span class="branch">develop</span>..<span class="branch">HEAD</span>
+                <div class="flex padding-x">
+                     <h3>Deploy TR</h3> <div class="tag">dev (rel | prod) </div>
+                </div>
+   
+                <pre onclick="copyCode(this)"><span class="cmd">make</span> <span class="flag">deploy</span> <span class="branch">VERSION=3.45.11-5 CONFIGURATION=dev PORT=81
+</span></pre>
 
-<span class="comment"># Склеить N коммитов в один</span>
-<span class="cmd">git reset</span> <span class="flag">--soft</span> <span class="branch">develop</span>
-<span class="cmd">git commit</span> <span class="flag">-m</span> "TASK-123: Описание"</pre>
+                <div class="flex padding-x">
+                    <h3>TRS</h3> <div class="tag">(prod)</div>
+                </div>
+   
+                <pre onclick="copyCode(this)"><span class="cmd">make deploy</span> <span class="branch">VERSION=0.0.29-10 SERVER_ENV=prod</span></pre>
+
+
                 <div class="note">
                     <strong>Зачем?</strong> Один коммит = одна задача. Тогда cherry-pick берёт всю задачу целиком без
                     проблем.
@@ -295,16 +340,30 @@
 
             <!-- STEP 3 -->
             <div class="card">
-                <h2><span class="num">3</span> Мерж в develop <span class="tag tag-safe">безопасно</span></h2>
-                <h3>влить задачу в общую сборку</h3>
-                <pre onclick="copyCode(this)"><span class="cmd">git checkout</span> <span class="branch">develop</span>
-<span class="cmd">git pull</span>
-<span class="cmd">git checkout</span> <span class="branch">feature/TASK-123-описание</span>
-<span class="cmd">git merge</span> <span class="branch">develop</span>
-<span class="comment"># Решение конфликтов, при необходимости</span>
-<span class="cmd">git push</span></pre>
+                <h2><span class="num">3</span> Прозрачность hex <span class="tag tag-safe">безопасно</span></h2>
                 <div class="note">
-                    Теперь задача в <strong>develop</strong> — QA тестирует полную сборку со всеми задачами вместе.
+           
+                    100% FF </br>
+                    95%	F2 </br>
+                    90%	E6 </br>
+                    85%	D9 </br>
+                    80%	CC </br>
+                    75%	BF </br>
+                    70%	B3 </br>
+                    65%	A6 </br>
+                    60%	99  </br>
+                    55%	8C  </br>
+                    50%	80  </br>
+                    45%	73  </br>
+                    40%	66  </br>
+                    35%	59  </br>
+                    30%	4D  </br>
+                    25%	40  </br>
+                    20%	33  </br>
+                    15%	26  </br>
+                    10%	1A  </br>
+                    5%	0D  </br>
+                    0%	00  </br>
                 </div>
             </div>
 
