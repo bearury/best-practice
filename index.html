@@ -169,6 +169,23 @@
                 color: var(--text-dim);
             }
 
+            .note .comment {
+                color: var(--text-dim);
+            }
+            .note .cmd {
+                color: var(--green);
+            }
+            .note .branch {
+                color: var(--purple);
+            }
+            .note .flag {
+                color: var(--orange);
+            }
+            .note .hash {
+                color: var(--cyan);
+            }
+
+
             .note strong {
                 color: var(--text);
             }
@@ -377,35 +394,39 @@
                 <h5>Если собрано через docker compose</h5>
                 <pre
                     onclick="copyCode(this)"
-                ><span class="cmd">docker compose</span> <span class="flag">down -v</span></pre>
-                <div class="note">Каждая строка = одна задача (благодаря squash). Берёшь хеш нужных.</div>
+                ><span class="cmd">docker compose</span> <span class="flag">-f docker-compose.db.yml</span> <span class="branch">down -v</span></pre>
+                <div class="note">
+                    <span class="cmd">docker compose</span> — вызов утилиты Docker Compose для управления мультиконтейнерными приложениями. </br>
+                    <span class="flag">-f docker-compose.db.yml</span> — флаг (--file), который указывает использовать конкретный файл конфигурации (docker-compose.db.yml) вместо стандартного compose.yaml или docker-compose.yml </br>
+                    <span class="branch">down -v</span> — остановка и удаление контейнеров и их value</br>
+                </div>
             </div>
 
             <!-- STEP 5 -->
             <div class="card">
-                <h2><span class="num">5</span> Собрать релиз <span class="tag tag-caution">внимательно</span></h2>
-                <h3>создать ветку релиза от последнего прода</h3>
-                <pre onclick="copyCode(this)"><span class="comment"># Если main не чистый — от последнего тега</span>
-<span class="cmd">git checkout</span> <span class="flag">-b</span> <span class="branch">release/2.5.0</span> <span class="hash">v2.4.0</span>
+                <h2><span class="num">5</span> Команды Docker  <span class="tag tag-safe">запуск / старт</span></h2>
+                <h5>Запуск через docker compose</h5>
 
-<span class="comment"># Или от main если он чистый</span>
-<span class="cmd">git checkout</span> <span class="branch">main</span>
-<span class="cmd">git checkout</span> <span class="flag">-b</span> <span class="branch">release/2.5.0</span></pre>
-                <h3>cherry-pick только нужные задачи</h3>
-                <pre onclick="copyCode(this)"><span class="comment"># Берём задачи 45 и 41, НЕ берём 38 и 52</span>
-<span class="cmd">git cherry-pick</span> <span class="hash">2c9eeb6b</span>  <span class="comment"># TASK-45</span>
-<span class="cmd">git cherry-pick</span> <span class="hash">i9j0k1l2</span>  <span class="comment"># TASK-41</span>
-
-<span class="comment"># Тестируем → если ОК → пуш</span>
-<span class="cmd">git push</span> <span class="flag">-u</span> origin <span class="branch">release/2.5.0</span></pre>
-                <h3>или если все задачи:</h3>
-                <pre onclick="copyCode(this)">
-<span class="cmd">git cherry-pick</span> <span class="branch">main..develop</span></pre>
+                <pre
+                    onclick="copyCode(this)"
+                ><span class="cmd">docker compose</span> <span class="flag">-f docker-compose.db.yml</span> <span class="branch">up -d</span></pre>
+                <div class="note">
+                    <span class="cmd">docker compose</span> — вызов утилиты Docker Compose для управления мультиконтейнерными приложениями. </br>
+                    <span class="flag">-f docker-compose.db.yml</span> — флаг (--file), который указывает использовать конкретный файл конфигурации (docker-compose.db.yml) вместо стандартного compose.yaml или docker-compose.yml </br>
+                    <span class="branch">up -d</span> — команда для сборки, создания и запуска сервисов, описанных в файле флаг (--detach), который запускает контейнеры в фоновом режиме (отвязанными от терминала)</br>
+                </div>
+                </br>
             </div>
 
             <!-- STEP 6 -->
             <div class="card">
-                <h2><span class="num">6</span> Версионирование <span class="tag tag-danger">на подумать !!!!</span></h2>
+                <h2><span class="num">6</span> Команды Docker <span class="tag tag-caution">💊</span></h2>
+                <h5>Посмотреть логи запущенного контейнера</h5>
+                <pre onclick="copyCode(this)"><span class="cmd">docker compose</span> <span class="flag">-f docker-compose.db.yml</span> <span class="branch">logs </br>--tail=50 <span class="flag">-f | grep "искомое_слово"</span></span></pre>
+                <div class="note">
+                    <span class="branch">--tail=50</span> — последние 50 строк </br>
+                    <span class="flag">-f | grep "искомое_слово"</span> — поиск по указанному вхождению</br>
+                </div>
             </div>
 
             <!-- CONFLICTS -->
