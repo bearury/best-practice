@@ -369,16 +369,15 @@
 
             <!-- STEP 4 -->
             <div class="card">
-                <h2><span class="num">4</span> Посмотреть все задачи <span class="tag tag-safe">безопасно</span></h2>
-                <h3>что есть в develop, чего нет в main</h3>
+                <h2><span class="num">4</span> Частые команды Docker <span class="tag tag-danger">осторожно</span></h2>
+                <h5>Удалить контейнер и все его image и values</h5>
                 <pre
                     onclick="copyCode(this)"
-                ><span class="cmd">git log</span> <span class="flag">--oneline</span> <span class="branch">main</span>..<span class="branch">develop</span></pre>
-                <h3>вывод</h3>
-                <pre><span class="hash">2c9eeb6b</span> TASK-45: Исправлена галерея в Safari
-<span class="hash">a1b2c3d4</span> TASK-38: Редизайн техмерча
-<span class="hash">e5f6g7h8</span> TASK-52: Новые отчёты
-<span class="hash">i9j0k1l2</span> TASK-41: Фикс клика по меню</pre>
+                ><span class="cmd">docker</span> <span class="flag">rm -fv</span> <span class="branch"><имя_или_id_контейнера></span></pre>
+                <h5>Если собрано через docker compose</h5>
+                <pre
+                    onclick="copyCode(this)"
+                ><span class="cmd">docker compose</span> <span class="flag">down -v</span></pre>
                 <div class="note">Каждая строка = одна задача (благодаря squash). Берёшь хеш нужных.</div>
             </div>
 
