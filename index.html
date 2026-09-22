@@ -323,6 +323,11 @@
                     Порт </br>
                     <strong>:81</strong> — tr-portal.ru </br>
                 </div>
+
+                <h3 class="padding-x">Datalens</h3>
+
+                <pre onclick="copyCode(this)"><span class="cmd">ssh</span> <span class="branch">root@188.124.36.154</span></pre>
+                <pre onclick="copyCode(this)"><span class="cmd">madeRoot123$</span></pre>
             </div>
 
             <!-- STEP 2 -->
@@ -341,18 +346,11 @@
    
                 <pre onclick="copyCode(this)"><span class="cmd">make</span> <span class="flag">deploy</span> <span class="branch">VERSION=3.45.11-5 CONFIGURATION=dev PORT=81
 </span></pre>
-
                 <div class="flex padding-x">
                     <h3>TRS</h3> <div class="tag">(prod)</div>
                 </div>
    
-                <pre onclick="copyCode(this)"><span class="cmd">make deploy</span> <span class="branch">VERSION=0.0.29-10 SERVER_ENV=prod</span></pre>
-
-
-                <div class="note">
-                    <strong>Зачем?</strong> Один коммит = одна задача. Тогда cherry-pick берёт всю задачу целиком без
-                    проблем.
-                </div>
+                <pre onclick="copyCode(this)"><span class="cmd">make deploy</span> <span class="branch">VERSION=0.0.29-10 SERVER_ENV=prod CONTAINER_NAME=trs-prod-bearury</span></pre>
             </div>
 
             <!-- STEP 3 -->
