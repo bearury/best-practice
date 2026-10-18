@@ -311,11 +311,6 @@
                     <strong>:80</strong> — <a href="https://release.tr-portal.ru ">release.tr-portal.ru </a>
                 </div>
 
-                <div class="note">
-                    Порты TRS 2.0</br>
-                    <strong>:82</strong> — <a href="http://trs.tr-portal.ru/">trs.tr-portal.ru/</a></br>
-                </div>
-
                 <h3 class="padding-x">Production</h3>
 
                 <pre onclick="copyCode(this)"><span class="cmd">ssh</span> <span class="branch">dockeradmin@192.168.150.103</span></pre>
@@ -330,9 +325,30 @@
                 <pre onclick="copyCode(this)"><span class="cmd">madeRoot123$</span></pre>
             </div>
 
-            <!-- STEP 2 -->
+                        <!-- STEP 2 -->
             <div class="card">
-                <h2><span class="num">2</span> Команды деплоя <span class="tag tag-caution">важно!</span></h2>
+                <h2><span class="num">2</span> Деплой Instore TRS<span class="tag tag-caution">важно!</span></h2>
+                <h3 class="padding-x">Develop</h3>
+                <pre
+                    onclick="copyCode(this)"
+                ><span class="cmd">ssh</span> <span class="branch">dockeradmin@192.168.204.144</span></pre>
+                  <div class="note">
+                    Порты TRS 2.0</br>
+                    <strong>:82</strong> — <a href="http://trs.tr-portal.ru/">trs.tr-portal.ru</a></br>
+                </div>
+
+                <h3 class="padding-x">Production</h3>
+
+                <pre onclick="copyCode(this)"><span class="cmd">ssh</span> <span class="branch">server@192.168.204.184</span></pre>
+                <div class="note">
+                    Порт </br>
+                    <strong>:82</strong> — <a href="http://trs-demo.tr-portal.ru/">trs-demo.tr-portal.ru</a></br>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="card">
+                <h2><span class="num">3</span> Команды деплоя <span class="tag tag-caution">важно!</span></h2>
                 <div class="flex padding-x">
                     <h3>TR</h3> <div class="tag">(build and push local)</div>
                 </div>
@@ -353,9 +369,9 @@
                 <pre onclick="copyCode(this)"><span class="cmd">make deploy</span> <span class="branch">VERSION=0.0.29-10 SERVER_ENV=prod CONTAINER_NAME=trs-prod-bearury</span></pre>
             </div>
 
-            <!-- STEP 3 -->
+            <!-- STEP 4 -->
             <div class="card">
-                <h2><span class="num">3</span> Прозрачность hex <span class="tag tag-safe">безопасно</span></h2>
+                <h2><span class="num">4</span> Прозрачность hex <span class="tag tag-safe">безопасно</span></h2>
                 <div class="note">
            
                     100% FF </br>
@@ -382,9 +398,9 @@
                 </div>
             </div>
 
-            <!-- STEP 4 -->
+            <!-- STEP 5 -->
             <div class="card">
-                <h2><span class="num">4</span> Частые команды Docker <span class="tag tag-danger">осторожно</span></h2>
+                <h2><span class="num">5</span> Частые команды Docker <span class="tag tag-danger">осторожно</span></h2>
                 <h5>Удалить контейнер и все его image и values</h5>
                 <pre
                     onclick="copyCode(this)"
@@ -400,9 +416,9 @@
                 </div>
             </div>
 
-            <!-- STEP 5 -->
+            <!-- STEP 6 -->
             <div class="card">
-                <h2><span class="num">5</span> Команды Docker  <span class="tag tag-safe">запуск / старт</span></h2>
+                <h2><span class="num">6</span> Команды Docker  <span class="tag tag-safe">запуск / старт</span></h2>
                 <h5>Запуск через docker compose</h5>
 
                 <pre
@@ -416,9 +432,9 @@
                 </br>
             </div>
 
-            <!-- STEP 6 -->
+            <!-- STEP 7 -->
             <div class="card">
-                <h2><span class="num">6</span> Команды Docker <span class="tag tag-caution">💊</span></h2>
+                <h2><span class="num">7</span> Команды Docker <span class="tag tag-caution">💊</span></h2>
                 <h5>Посмотреть логи запущенного контейнера</h5>
                 <pre onclick="copyCode(this)"><span class="cmd">docker compose</span> <span class="flag">-f docker-compose.db.yml</span> <span class="branch">logs </br>--tail=50 <span class="flag">-f | grep "искомое_слово"</span></span></pre>
                 <div class="note">
